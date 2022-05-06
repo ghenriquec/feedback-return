@@ -1,6 +1,8 @@
 import { CloseButton } from "../../CloseButton"
 import { FeedbackType, feedbackTypes } from ".."
 import { ArrowLeft, Camera } from "phosphor-react";
+import { ScreenShotButton } from "../ScreenshotButton";
+import { useState } from "react";
 
 interface FeedbackContentStepProps {
   feedbackType: FeedbackType;
@@ -8,6 +10,7 @@ interface FeedbackContentStepProps {
 }
 
 export function FeedbackContentStep ({ feedbackType, onFeedbackRestartRequested }: FeedbackContentStepProps) {
+  const [screenshot, setScreenshot] = useState<string | null>(null);
   const feedbackTypeInfo = feedbackTypes[feedbackType]
 
   return (
@@ -18,7 +21,7 @@ export function FeedbackContentStep ({ feedbackType, onFeedbackRestartRequested 
       className="top-5 left-5 absolute text-zinc-400 hover:text-zinc-100"
       onClick={onFeedbackRestartRequested}
       >
-        <ArrowLeft weight="bold" className="w-4 h-4"/>
+      <ArrowLeft weight="bold" className="w-4 h-4"/>
       </button>
         <span className="text-xl leading-6 flex items-center gap-2">
           <img src={feedbackTypeInfo.image.source} alt={feedbackTypeInfo.image.alt} className="w-6 h-6"/>
@@ -33,13 +36,9 @@ export function FeedbackContentStep ({ feedbackType, onFeedbackRestartRequested 
         placeholder="What is happening?"
         />
          <footer className="flex gap-2 mt-2">
-            <button
-            type="button"
-            className="p-2 bg-zinc-800 rounded-md border-transparent hover:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500"
-            >
-              <Camera className="w-6 h-6" />
-            </button>
-
+            <ScreenShotButton 
+            onScreenShotTook={setScreenshot}
+            />
            <button
            type="submit"
            className="p-2 bg-brand-500 rounded-md border-transparent flex-1 flex justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500 transition-colors"
