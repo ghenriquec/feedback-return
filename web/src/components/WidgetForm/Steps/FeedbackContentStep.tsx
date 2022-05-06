@@ -37,6 +37,7 @@ export function FeedbackContentStep ({ feedbackType, onFeedbackRestartRequested 
         />
          <footer className="flex gap-2 mt-2">
             <ScreenShotButton 
+            screenshot={screenshot}
             onScreenShotTook={setScreenshot}
             />
            <button
